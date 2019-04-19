@@ -1,0 +1,18 @@
+version: '3'
+services:
+  editor:
+    image: amanente/theiaide:next
+    user: root
+    ports:
+      - "3000:3000"
+    volumes:
+      - "$PWD:/home/project:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  
+  compiler:
+    image: amanente/esp-open-rtos:latest 
+    entrypoint: "tail -f /var/log/alternatives.log"
+    user: root
+    volumes:
+      - "$PWD:/home/project"
